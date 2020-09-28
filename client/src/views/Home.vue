@@ -11,7 +11,7 @@
       <!-- MONTH -->
       <b-row style="padding: 1.5vh 0 0">
         <b-col class="cb all">
-          <p class="month-text">AUGUST</p>
+          <p class="month-text">{{name_month}}</p>
         </b-col>
       </b-row>
 
@@ -327,6 +327,7 @@ export default {
     return {
       col_date: 0,
       date_key: null,
+      name_month: null,
 
       headerTextVariant: "warning",
 
@@ -403,6 +404,10 @@ export default {
     loadDay: async function () {
       let self = this
       let res = await Day.fetch()
+      console.log(`temptoday: ${res.data.temptoday}`)
+      console.log(`date: ${res.data.date}`)
+      console.log(`tommorrow: ${res.data.tommorrow}`)
+      console.log(`test: ${res.data.test}`)
       const data = new Promise((resolve) => {
         res.data.day.forEach((day) => {
           //SETTING VIP
@@ -413,9 +418,9 @@ export default {
               self.is_vip = day.vip
             }
           } 
-          
           self.pick_day.push(day)
         });
+        self.name_month = self.pick_day[0].month;
         resolve()
       });
       Promise.resolve(data);

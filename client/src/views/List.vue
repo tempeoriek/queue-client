@@ -62,7 +62,7 @@ export default {
     loadDay: async function () {
       let self = this
       self.is_busy = false
-      let res = await Day.fetch()
+      let res = await Day.fetchAdmin()
       const data = new Promise((resolve) => {
         res.data.day.forEach((day) => {
           self.pick_day.push({
